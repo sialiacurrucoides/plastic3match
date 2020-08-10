@@ -1,0 +1,321 @@
+@import url('https://fonts.googleapis.com/css?family=Chewy&display=swap');
+
+:root {
+	--field-width: 500px;
+	--field-height: 320px;
+	--box-height: 420px;
+	--pop-up-bg: rgba(0, 0, 0, .8);
+	--game-color: #c4c6a9;
+	--game-font-color: rgba(255, 255, 255, .8);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Chewy', cursive;
+}
+
+#playField {
+	min-height: var(--field-height);
+	/*width: 400px;*/
+	width: var(--field-width) !important;
+	margin: auto;
+	background-image: url('./imgs/bin-bg-light.bmp');
+	position: absolute;
+	background-size: cover;
+	border: 1px solid var(--game-color);
+}
+
+.gameHeader {
+	/*width: 400px;*/
+	max-width: var(--field-width) !important;
+	margin: auto;
+	background-color: var(--game-color);
+	padding: 0.8rem;
+	color: var(--game-font-color);
+	text-align: center;
+}
+
+#playField .col-1 img {
+	border-radius: 25%;
+	margin: 0;
+	box-shadow: #444 3px 2px 2px;
+	height: 32px;
+	opacity: 0.8;
+	padding: 2px;
+	position: relative;
+	/*animation: fall 0.5s linear 0.5s;*/
+}
+
+.newTile {
+	animation: fall 0.35s linear;
+}
+
+#playField .col-1 {
+	height: 34px;
+	padding: 0;
+}
+
+@keyframes fall {
+	0% {
+		top: -36px;
+	}
+	100% {
+		top: 0px;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	#playField .col-1 {
+		height: 28px;
+		padding: 0;
+	}
+	#playField .col-1 img {
+		border-radius: 25%;
+		margin: 0;
+		box-shadow: #444 3px 2px 2px;
+		height: 26px;
+		opacity: 0.8;
+		padding: 2px;
+	}
+}
+
+.highlighted {
+	box-shadow: #6b746e 6px 3px 3px !important;
+	height: 36px !important;
+	width: auto;
+}
+
+.disappearing {
+	box-shadow: #464335 6px 3px 3px !important;
+	height: 36px !important;
+	width: auto;
+}
+
+.alert-success {
+	box-shadow: rgb(191, 194, 163) 2px 2px 2px !important;
+	height: 36px !important;
+}
+
+.popUpTech,
+.popGameOver,
+.popGameStart,
+.congrat {
+	position: absolute;
+	top: 50%; /* position the top  edge of the element at the middle of the parent */
+	left: 50%; /* position the left edge of the element at the middle of the parent */
+	transform: translate(-50%, -50%);
+	background-color: var(--pop-up-bg);
+	color: var(--game-font-color);
+	text-shadow: 1px 1px 3px #444;
+	padding: 1.2rem;
+	line-height: normal;
+	padding-top: 1.6rem;
+	margin: auto;
+	z-index: 1000;
+	width: var(--field-width);
+	min-height: var(--box-height);
+	font-size: 1.2rem;
+}
+
+.congrat {
+	font-size: 1.6rem;
+}
+
+#over {
+	font-size: 3rem;
+}
+
+.hidden {
+	display: none;
+}
+
+.tech-3,
+.tech-6,
+.tech-7 {
+	font-weight: bold;
+	padding: 4px 8px 4px 8px;
+	border-radius: 50%;
+	position: relative;
+	top: 8px;
+}
+
+.inactive {
+	text-shadow: 2px 2px 1px #ccc;
+	color: var(--game-font-color);
+	font-size: 100%;
+	box-shadow: inset 0 0 4px rgb(161, 155, 146);
+}
+
+.activated {
+	text-shadow: 0 0 1px rgb(238, 184, 103);
+	font-size: 140%;
+	color: rgb(245, 230, 148);
+	box-shadow: 2px 2px 4px rgb(245, 230, 148);
+	size: 120%;
+	position: relative;
+	animation: mymove 2s;
+}
+
+@keyframes mymove {
+	/*     0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);} */
+	from {
+		left: -200px;
+	}
+	to {
+		left: 0px;
+	}
+}
+
+.tech-btn {
+	background-color: var(--game-color);
+	color: var(--game-font-color);
+	font-weight: bold;
+}
+.tech-btn:hover {
+	color: #444;
+	background-color: beige;
+}
+/*intro style except pop-up, that is general and above*/
+#introTitle {
+	font-size: 34px;
+	line-height: 42px;
+	align-items: center;
+	text-align: center;
+	margin-bottom: 1rem;
+}
+
+.intro {
+	font-size: 18px;
+	line-height: 23px;
+	align-items: center;
+	text-align: center;
+}
+
+.start-btn {
+	background-color: transparent;
+	line-height: 120px;
+	color: var(--game-font-color);
+	font-weight: bold;
+	width: 150px;
+	height: 146px;
+	margin-top: 1.4rem;
+	background-image: url(imgs/recycle.png);
+	background-position: center;
+	font-size: 28px;
+	text-align: center;
+	vertical-align: middle;
+	margin: auto;
+}
+
+#intro1,
+#intro2,
+#intro3,
+#intro4 {
+	position: fixed;
+	bottom: 20px;
+	left: 175px;
+}
+
+.start-btn:hover {
+	color: var(--game-color);
+}
+
+#introWin2 img {
+	margin: 4px;
+	border-radius: 25%;
+	margin: auto;
+	box-shadow: #444 3px 2px 2px;
+	height: 32px;
+	opacity: 0.8;
+	padding: 4px;
+}
+
+#plusSign {
+	margin: 4px;
+	height: 32px;
+	opacity: 0.8;
+}
+
+.arrow {
+	display: inline-block;
+	font-size: 24px;
+	color: var(--game-font-color);
+	text-shadow: 1px 2px 2px var(--game-font-color);
+	padding: 0 4px;
+}
+
+#basicTurtle {
+	background-image: url(./imgs/tekifej1.png);
+}
+
+#smilingTurtle {
+	background-image: url(./imgs/tekifej2.png);
+	transition-duration: 0.5s;
+}
+
+#basicTurtle,
+#smilingTurtle {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 50px;
+	height: 49px;
+	background-position: center;
+}
+
+#turtleBox {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	height: 49px;
+	width: 100px;
+}
+
+#turtleBox i {
+	cursor: pointer;
+}
+
+#timeIcon {
+	color: var(--game-font-color);
+	font-size: 3rem;
+	padding: 1rem;
+	animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+#timeLimit {
+	color: var(--game-color);
+}
+
+.focusAttention {
+	box-sizing: border-box;
+	border: 2px solid hsla(111, 80%, 20%);
+	border-top: transparent;
+	border-bottom: transparent;
+	border-radius: 10px;
+	background-color: rgb(173, 175, 150);
+}
+
+#stepsAnimation {
+	height: 38px;
+}
+
+.littleStar {
+	background-image: url("./imgs/star.png");
+	height: 15px;
+	width: 15px;
+	position: absolute;
+	bottom: 5px;
+	right: 10px;
+}

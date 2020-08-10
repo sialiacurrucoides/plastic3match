@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Plastic-3-match</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+     <link rel="stylesheet" href="plastic3match.css">
+     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <div class="row gameHeader justify-content-between mt-5">
+            <div class="col-2" id="dispTime">
+                <p>Timer <span id="time-since-start">4:00</span></p>
+            </div>
+            <div class="col-2" id="dispScore">
+                <p>Score <span id="curr-score" class="pl-3"> --</span>  </p>
+            </div>
+            <div class="col-2" id="dispGoal">
+                <p>Goal <span id="next-goal" class="pl-3"> 70</span>  </p>
+            </div>
+            <div class="col-3" id="dispTechs">
+                <span class="inactive tech-3">3</span><span class="inactive tech-6">6</span><span class="inactive tech-7">7</span>
+            </div>                    
+            <div class="col-2">
+                <p>Record <span id="record">0</span>  </p>
+            </div>
+        </div>
+        <div class="row justify-content-center p-0">
+            <div class="col-12 pt-3 pb-3" id="playField">
+                <div class="row p-row-1 justify-content-center">
+                      Filling the bin...                        
+                
+                </div>
+            </div>
+        </div>
+        <div class="row popUpTech hidden justify-content-center">
+            <div class="col-12 col-md-6 pt-3 pb-3 m-auto text-center">
+                <p class="text-center">Great work! Choose one type that you can handle from now on.</p><br>
+                <div class="btn btn-secondary m-3 tech-btn" id="create-3">Create Tech 3!</div>
+                <div class="btn btn-secondary m-3 tech-btn" id="create-6">Create Tech 6!</div>
+                <div class="btn btn-secondary m-3 tech-btn" id="create-7">Create Tech 7!</div>
+            </div>
+        </div>
+        <div class="row congrat hidden justify-content-center" id="winner">
+            <div class="col-12 col-md-6 pt-3 pb-3 m-auto text-center">
+                <p class="text-center">Amazing! You win. Keep this enthusiasm!</p><br>
+                <img src="./imgs/gray-and-green-turtle.jpg" alt="turtle">
+                <p class="text-center">Your score: <span class="finalScore"></span></p><br>
+                <div class="btn btn-secondary m-3 tech-btn again-btn" >Play again</div>
+                <p >Did you know? <span class="didYouKnow"></span></p>
+            </div>
+        </div>
+        <div class="row popGameOver hidden justify-content-center" id="loser">
+            <div class="col-12 pt-2 pb-2 text-center">
+                <p class="text-center pt-5" id="over">GAME OVER</p><br>
+                <p class="text-center">Your score: <span class="finalScore"></span></p>
+                <div class="btn btn-secondary m-3 tech-btn again-btn" >Play again</div>
+            </div>
+        </div>
+        <div class="row popGameStart justify-content-center" id="introWin1">
+            <div class="col-12 py-2 text-center">
+                <p class="text-center my-3" id="introTitle">Welcome to Plastic3match!</p>
+                <p class="text-center intro">A three-match game where you cannot make the non-recyclable plastic pieces disappear.</p><br>
+                <p class="text-center intro">Unless... You develop new technologies.</p>
+               <div class="btn start-btn" id="intro1">GO</div>
+            </div>
+        </div> 
+        <div class="row popGameStart justify-content-center hidden" id="introWin2">
+            <div class="col-12 pt-2 pb-2 text-center">
+                <p class="text-center intro p-3">Switch <strong>ANY</strong> adjacent pieces!</p>
+                <div id="stepsAnimation">
+                    <div class="step-1">
+                        <img src="imgs/icon_1.png" alt="plastic-1"><i class='fas fa-arrows-alt-h arrow'></i><img src="imgs/icon_2.png" alt="plastic-2"><img src="imgs/icon_1.png" alt="plastic-1"><img src="imgs/icon_1.png" alt="plastic-1">
+                    </div>
+                    <div class="step-2 hidden">
+                        <img src="imgs/icon_2.png" alt="plastic-2"><img src="imgs/icon_1.png" alt="plastic-1"><img src="imgs/icon_1.png" alt="plastic-1"><img src="imgs/icon_1.png" alt="plastic-1">
+                    </div>
+                    <div class="step-3 hidden">
+                        <img src="imgs/icon_2.png" alt="plastic-2"><img src="imgs/icon_5.png" alt="plastic-5"><img src="imgs/icon_3.png" alt="plastic-3"><img src="imgs/icon_4.png" alt="plastic-4">
+                    </div>
+                </div>
+                <p class="text-center intro p-3">...by clicking on each or by dragging one </p>
+                <div class="btn start-btn" id="intro2">GO</div>
+            </div>
+        </div>  
+        <div class="row popGameStart justify-content-center hidden" id="introWin3">
+            <div class="col-12 pt-2 pb-2 text-center">
+                <p class="text-center intro">
+                    Aim for the next goal: <span id="next-goal" class="pl-3"> 70</span>
+                </p>
+                <p class="text-center intro">
+                    reaching the goal allows you to develop <em>new</em> technologies to deal with non-recyclable plastic types:
+                </p>
+                <p class="text-center"><span class="activated tech-3">3</span><span class="activated tech-6">6</span><span class="activated tech-7">7</span></p><br>
+                <p class="text-center intro">then you can <em>eliminate</em> the given number/plastic type!</p>
+                <div class="btn start-btn" id="intro3">GO</div>
+            </div>
+        </div> 
+        <div class="row popGameStart justify-content-center hidden" id="introWin4">
+            <div class="col-12 pt-2 pb-2 text-center">
+                <p class="text-center">You WIN if less than 10 remained from 3/6/7!</p>
+                <p>We, like Earth as we know it, are running ouf time...</p>
+                <p>You've got <strong id="timeLimit">4</strong> minutes!</p>
+                <div class="text-center m-auto">
+                    <i class="fa fa-hourglass-2" id="timeIcon"></i>                   
+                </div>
+                <div class="btn start-btn" id="intro4">GO</div>
+            </div>
+        </div>                    
+    </div>
+    <div id="turtleBox">
+        <div id="muteTurtle">
+            <div class="volume-up">
+                <i class='fas fa-volume-up' style='font-size:1.5rem'></i>
+            </div>
+            <div class="volume-mute hidden">
+                <i class='fas fa-volume-mute' style='font-size:1.5rem; color:#999;'></i>
+            </div>
+        </div>
+        <div id="basicTurtle"></div><div id="smilingTurtle" class="hidden"></div>
+    </div>
+
+    <script src="plastic3match.js"></script>
+</body>
+</html>
